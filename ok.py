@@ -412,7 +412,7 @@ if selected =="Predict new SMILES molecule":
                 gc.collect()
             else:
                 df = pd.read_csv("pharmaceuticAI_all_compounds.smiles")
-                model = load_model('tmpee2tkney.hdf5')
+                model = load_model('model_final.h5')
                 original = predict_nsmiles
 
                 # double letters for one element turned into single letters that are not in the dataset
