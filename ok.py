@@ -330,13 +330,9 @@ if selected =="Check your SMILES molecule":
                 
                 prediction4 = model4.predict(my_array)
                 prediction4_2 = ' '.join(map(str, prediction4))
-                predictionprob4 = model4.predict_proba(my_array)
-                predictionprob44 = ' '.join(map(str, predictionprob4[:,-1]))
 
                 prediction5 = model5.predict(my_array)
                 prediction5_2 = ' '.join(map(str, prediction5))
-                predictionprob5 = model5.predict_proba(my_array)
-                predictionprob55 = ' '.join(map(str, predictionprob5[:,1]))
                 gc.collect()
 
 
@@ -353,14 +349,14 @@ if selected =="Check your SMILES molecule":
                 col2.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col2.write('<p class="font-family: Poppins, sans-serif;">Predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
                 col2.code(prediction4_2)
-                col2.write('<p class="font-family: Poppins, sans-serif;">Probability value predicted your active/inactive</p>', unsafe_allow_html=True)
-                col2.code(predictionprob44)
+                col2.write('<p class="font-family: Poppins, sans-serif;">AutoSklearnClassifier yielded us an accuracy score of:</p>', unsafe_allow_html=True)
+                col2.code("0.808")
 
                 col3.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family: Poppins, sans-serif;">Predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(prediction5_2)
-                col3.write('<p class="font-family: Poppins, sans-serif;">Probability value predicted your approve/non-approve Drug</p>', unsafe_allow_html=True)
-                col3.code(predictionprob55)
+                col3.write('<p class="font-family: Poppins, sans-serif;">RandomForest Classifier yielded us an accuracy score of:</p>', unsafe_allow_html=True)
+                col3.code("0.69")
                 gc.collect()
         except:
              st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
@@ -687,42 +683,40 @@ if selected =="Predict new SMILES molecule":
                 my_array = np.array(dfm)
 
   
-                predict_pIC502 = prediction_pIC50(augmented)
-                prediction302 = ' '.join(map(str, predict_pIC502))
+                
+                predict_pIC501 = prediction_pIC50(canonical_smiles)
+                prediction301 = ' '.join(map(str, predict_pIC501))
                
                 
-                prediction402 = model4.predict(my_array)
-                prediction4_21 = ' '.join(map(str, prediction402))
-                predictionprob402 = model4.predict_proba(my_array)
-                predictionprob442 = ' '.join(map(str, predictionprob402[:,-1]))
+                prediction401 = model4.predict(my_array)
+                prediction402 = ' '.join(map(str, prediction401))
 
-                prediction5 = model5.predict(my_array)
-                prediction5_21 = ' '.join(map(str, prediction5))
-                predictionprob502 = model5.predict_proba(my_array)
-                predictionprob552 = ' '.join(map(str, predictionprob502[:,1]))
+                prediction501 = model5.predict(my_array)
+                prediction502 = ' '.join(map(str, prediction501))
                 gc.collect()
 
 
                 with open('style.css') as f:
                     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
                 col1, col2, col3 = st.columns(3)
                 col1.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family: Poppins, sans-serif;">Predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
-                col1.code(prediction302) 
+                col1.code(prediction301) 
                 col1.write('<p class="font-family: Poppins, sans-serif;">RandomForest Regressor yielded us an accuracy score of: </p>', unsafe_allow_html=True)
                 col1.code("0.789")
                 
                 col2.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col2.write('<p class="font-family: Poppins, sans-serif;">Predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
-                col2.code(prediction4_21)
-                col2.write('<p class="font-family: Poppins, sans-serif;">Probability value predicted your active/inactive</p>', unsafe_allow_html=True)
-                col2.code(predictionprob442)
+                col2.code(prediction402)
+                col2.write('<p class="font-family: Poppins, sans-serif;">AutoSklearnClassifier yielded us an accuracy score of:</p>', unsafe_allow_html=True)
+                col2.code("0.808")
 
                 col3.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family: Poppins, sans-serif;">Predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
-                col3.code(prediction5_21)
-                col3.write('<p class="font-family: Poppins, sans-serif;">Probability value predicted your approve/non-approve Drug</p>', unsafe_allow_html=True)
-                col3.code(predictionprob552)
+                col3.code(prediction502)
+                col3.write('<p class="font-family: Poppins, sans-serif;">RandomForest Classifier yielded us an accuracy score of:</p>', unsafe_allow_html=True)
+                col3.code("0.69")
                 gc.collect()
                 
                          
