@@ -51,7 +51,7 @@ t1, t2 = st.columns((0.15,1))
 t1.image('images/index4.png', width = 170)
 web_title = '<p style="text-align:; color:#3D0E04; font-size: 22px;">Web applications for Breast Cancer Novel Drug Discovery \n Using the ChEMBL Database and Deep Learning approach ChEMBL</p>'
 t2.markdown(web_title, unsafe_allow_html=True)
-web2_title = '<p style="text-align:; color:#3D0E04; font-size: 18px;">การพัฒนาเว็บแอพพลิเคชั่นสำหรับการค้นคว้ายาใหม่สำหรับมะเร็งเต้านมด้วยฐานข้อมูล</p>'
+web2_title = '<p style="text-align:; color:#3D0E04; font-size: 18px;">การพัฒนาเว็บแอพพลิเคชั่นสำหรับการค้นคว้ายาใหม่ของมะเร็งเต้านมด้วยฐานข้อมูล ChEMBL</p>'
 t2.markdown(web2_title, unsafe_allow_html=True)
 
 ### tab bar ####
@@ -683,38 +683,40 @@ if selected =="Predict new SMILES molecule":
                 my_array = np.array(dfm)
 
   
-                
-                predict_pIC501 = prediction_pIC50(canonical_smiles)
-                prediction301 = ' '.join(map(str, predict_pIC501))
+                predict_pIC502 = prediction_pIC50(augmented)
+                prediction302 = ' '.join(map(str, predict_pIC502))
                
                 
-                prediction401 = model4.predict(my_array)
-                prediction402 = ' '.join(map(str, prediction401))
+                prediction402 = model4.predict(my_array)
+                prediction4_21 = ' '.join(map(str, prediction402))
+                predictionprob402 = model4.predict_proba(my_array)
+                predictionprob442 = ' '.join(map(str, predictionprob402[:,-1]))
 
-                prediction501 = model5.predict(my_array)
-                prediction502 = ' '.join(map(str, prediction501))
+                prediction5 = model5.predict(my_array)
+                prediction5_21 = ' '.join(map(str, prediction5))
+                predictionprob502 = model5.predict_proba(my_array)
+                predictionprob552 = ' '.join(map(str, predictionprob502[:,1]))
                 gc.collect()
 
 
                 with open('style.css') as f:
                     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
                 col1, col2, col3 = st.columns(3)
                 col1.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family: Poppins, sans-serif;">Predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
-                col1.code(prediction301) 
+                col1.code(prediction302) 
                 col1.write('<p class="font-family: Poppins, sans-serif;">RandomForest Regressor yielded us an accuracy score of: </p>', unsafe_allow_html=True)
                 col1.code("0.789")
                 
                 col2.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col2.write('<p class="font-family: Poppins, sans-serif;">Predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
-                col2.code(prediction402)
+                col2.code(prediction4_21)
                 col2.write('<p class="font-family: Poppins, sans-serif;">AutoSklearnClassifier yielded us an accuracy score of:</p>', unsafe_allow_html=True)
                 col2.code("0.808")
 
                 col3.write("""<style>.font-family: Poppins, sans-serif; {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family: Poppins, sans-serif;">Predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
-                col3.code(prediction502)
+                col3.code(prediction5_21)
                 col3.write('<p class="font-family: Poppins, sans-serif;">RandomForest Classifier yielded us an accuracy score of:</p>', unsafe_allow_html=True)
                 col3.code("0.69")
                 gc.collect()
@@ -722,5 +724,4 @@ if selected =="Predict new SMILES molecule":
                          
         except:
              st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
-
 
